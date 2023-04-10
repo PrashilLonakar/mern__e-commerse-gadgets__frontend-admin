@@ -59,3 +59,35 @@ aside {
 .ant-layout-sider-children::-webkit-scrollbar-thumb {
   background-color: #1677ff;
 }
+
+.logo {
+  height: 64px;
+  margin: 0;
+}
+
+.sm-logo {
+  display: none;
+}
+
+.ant-layout-sider-collapsed .sm-logo {
+  display: block;
+}
+
+.ant-layout-sider-collapsed .lg-logo {
+  display: none;
+}
+
+.ant-layout-header h5 {
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.ant-layout-header p {
+  line-height: 25px;
+  font-size: 13px;
+}
+
+.ant-layout-header div .badge {
+  top: 16px;
+  right: -6px;
+}
