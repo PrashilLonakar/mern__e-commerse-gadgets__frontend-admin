@@ -27,12 +27,15 @@ const MainLayout = () => {
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo">
+        <div className="logo-lg">
           <h2 className="text-white fs-5 text-center py-3 mb-0">
-            <span className="sm-logo">AJ</span>
             <span className="lg-logo">Ama-John</span>
           </h2>
-          Ama-john
+        </div>
+        <div className="logo-sm">
+          <h2 className="text-white fs-5 text-center py-3 mb-0">
+            <span className="sm-logo">AJ</span>
+          </h2>
         </div>
         <Menu
           theme="dark"
@@ -198,6 +201,10 @@ const MainLayout = () => {
         <Header
           className="d-flex justify-content-between px-3 pe-3"
           style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            width: "100%",
             padding: 0,
             background: colorBgContainer,
           }}
@@ -211,14 +218,14 @@ const MainLayout = () => {
           )}
           <div className="d-flex gap-3 align-items-center">
             <div className="position-relative">
-              <IoIosNotifications style={{ "font-size": "25px" }} />
+              <IoIosNotifications style={{ fontSize: "25px" }} />
               <div className="badge bg-warning rounded-circle p-1 position-absolute">
                 3
               </div>
             </div>
             <div className="d-flex gap-3 align-items-center">
               <div>
-                <HiUserCircle style={{ "font-size": "60px" }} />
+                <HiUserCircle style={{ fontSize: "60px" }} />
               </div>
               <div>
                 <h5 className="mb-0">Dummy</h5>
