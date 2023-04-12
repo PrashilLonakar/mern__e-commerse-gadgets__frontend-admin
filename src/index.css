@@ -28,18 +28,31 @@ body {
   flex: 0 0 250px !important;
   max-width: 250px !important;
   min-width: 250px !important;
-  width: 250px !important;
+  width: 100% !important;
 }
 
 .ant-layout-sider-collapsed {
   flex: 0 0 80px !important;
   max-width: 80px !important;
   min-width: 80px !important;
-  width: 80px !important;
+  width: 100% !important;
 }
 
 main {
-  overflow: none;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: transparent !important;
+  margin: 15px 0px 15px 15px !important;
+  padding: 12px !important;
+}
+
+main::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+
+main::-webkit-scrollbar-thumb {
+  background-color: #1677ff;
 }
 
 aside {
@@ -60,21 +73,38 @@ aside {
   background-color: #1677ff;
 }
 
-.logo {
+.logo-lg{
   height: 64px;
   margin: 0;
+  width: 250px;
+  position: fixed;
+  z-index: 1000;
+  background-color: #001529;
+  transition: 0.4s;
 }
 
-.sm-logo {
+.logo-sm {
   display: none;
+  position: fixed;
+  z-index: 1000;
+  background-color: #001529;
+  transition: 0.4s;
 }
 
-.ant-layout-sider-collapsed .sm-logo {
+.ant-layout-sider-collapsed .logo-sm {
   display: block;
+  height: 64px;
+  margin: 0;
+  width: 80px;
+  transition: 0.4s;
 }
 
-.ant-layout-sider-collapsed .lg-logo {
+.ant-layout-sider-collapsed .logo-lg {
   display: none;
+  height: 64px;
+  margin: 0;
+  width: 250px;
+  transition: 0.4s;
 }
 
 .ant-layout-header h5 {
@@ -90,4 +120,12 @@ aside {
 .ant-layout-header div .badge {
   top: 16px;
   right: -6px;
+}
+/* 
+.ant-menu-title-content{
+  font-size: 16px;
+} */
+
+.ant-menu{
+  margin-top: 70px;
 }
