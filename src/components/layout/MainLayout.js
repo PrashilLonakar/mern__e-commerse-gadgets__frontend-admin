@@ -13,7 +13,7 @@ import { HiUserCircle } from "react-icons/hi";
 
 import { BsCart4, BsCardList, BsFillQuestionDiamondFill } from "react-icons/bs";
 import { FaBlogger, FaBlog } from "react-icons/fa";
-import { TbBrandAmigo, TbBrandProducthunt } from "react-icons/tb";
+import { TbBrandProducthunt } from "react-icons/tb";
 import { IoIosNotifications } from "react-icons/io";
 
 const { Header, Sider, Content } = Layout;
@@ -42,7 +42,7 @@ const MainLayout = () => {
           mode="inline"
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
-            if (key == "signout") {
+            if (key === "signout") {
             } else {
               navigate(key);
             }
@@ -54,7 +54,7 @@ const MainLayout = () => {
               label: "Dashboard",
             },
             {
-              key: "customers",
+              key: "customer",
               icon: <FiUsers className="fs-5" />,
               label: "Customers",
             },
@@ -64,7 +64,7 @@ const MainLayout = () => {
               label: "Catalogs",
               children: [
                 {
-                  key: "product",
+                  key: "products",
                   icon: <TbBrandProducthunt className="fs-5" />,
                   label: "Product",
                   children: [
@@ -74,14 +74,14 @@ const MainLayout = () => {
                       label: "Add",
                     },
                     {
-                      key: "product/list",
+                      key: "product",
                       icon: <BsCardList className="fs-5" />,
                       label: "List",
                     },
                   ],
                 },
                 {
-                  key: "brand",
+                  key: "brands",
                   icon: <SiBrandfolder className="fs-5" />,
                   label: "Brand",
                   children: [
@@ -91,14 +91,14 @@ const MainLayout = () => {
                       label: "Add",
                     },
                     {
-                      key: "brand/list",
+                      key: "brand",
                       icon: <BsCardList className="fs-5" />,
                       label: "List",
                     },
                   ],
                 },
                 {
-                  key: "category",
+                  key: "categorys",
                   icon: <BiCategory className="fs-5" />,
                   label: "Category",
                   children: [
@@ -108,14 +108,14 @@ const MainLayout = () => {
                       label: "Add",
                     },
                     {
-                      key: "category/list",
+                      key: "category",
                       icon: <BsCardList className="fs-5" />,
                       label: "List",
                     },
                   ],
                 },
                 {
-                  key: "color",
+                  key: "colors",
                   icon: <AiOutlineBgColors className="fs-5" />,
                   label: "Color",
                   children: [
@@ -125,7 +125,7 @@ const MainLayout = () => {
                       label: "Add",
                     },
                     {
-                      key: "color/list",
+                      key: "color",
                       icon: <BsCardList className="fs-5" />,
                       label: "List",
                     },
@@ -134,7 +134,7 @@ const MainLayout = () => {
               ],
             },
             {
-              key: "orders",
+              key: "order",
               icon: <HiClipboardList className="fs-5" />,
               label: "Orders",
             },
@@ -149,14 +149,14 @@ const MainLayout = () => {
                   label: "Add",
                 },
                 {
-                  key: "blog/list",
+                  key: "blog",
                   icon: <BsCardList className="fs-5" />,
                   label: "List",
                 },
               ],
             },
             {
-              key: "blog-category",
+              key: "blog-categorys",
               icon: <FaBlog className="fs-5" />,
               label: "Blog-Category",
               children: [
@@ -166,14 +166,14 @@ const MainLayout = () => {
                   label: "Add",
                 },
                 {
-                  key: "blog-category/list",
+                  key: "blog-category",
                   icon: <BsCardList className="fs-5" />,
                   label: "List",
                 },
               ],
             },
             {
-              key: "coupon",
+              key: "coupons",
               icon: <RiCoupon3Line className="fs-5" />,
               label: "Coupons",
               children: [
@@ -183,14 +183,14 @@ const MainLayout = () => {
                   label: "Add",
                 },
                 {
-                  key: "coupon/list",
+                  key: "coupon",
                   icon: <BsCardList className="fs-5" />,
                   label: "List",
                 },
               ],
             },
             {
-              key: "inquiries",
+              key: "inquiry",
               icon: <BsFillQuestionDiamondFill className="fs-5" />,
               label: "Inquiries",
             },
