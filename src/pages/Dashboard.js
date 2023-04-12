@@ -1,41 +1,65 @@
 import React from "react";
 import { BsArrowDownRight, BsArrowUpRight } from "react-icons/bs";
 import { Column } from "@ant-design/plots";
-import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import Listing from "../components/common/Listing";
 
 interface DataType {
   key: React.Key;
+  sno: string;
   name: string;
-  age: number;
-  address: string;
+  product: string;
+  status: string;
 }
 
 const columns: ColumnsType<DataType> = [
+  {
+    title: "SNo",
+    dataIndex: "sno",
+  },
   {
     title: "Name",
     dataIndex: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Product",
+    dataIndex: "product",
   },
   {
-    title: "Address",
-    dataIndex: "address",
+    title: "Status",
+    dataIndex: "status",
   },
 ];
-
-const data1: DataType[] = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
-
+const data1: DataType[] = [
+  {
+    key: "1",
+    sno: "1",
+    name: "John Brown",
+    product: "Mobile Phone",
+    status: "Pending",
+  },
+  {
+    key: "2",
+    sno: "2",
+    name: "Jim Green",
+    product: "Watch",
+    status: "Completed",
+  },
+  {
+    key: "3",
+    sno: "3",
+    name: "Joe Black",
+    product: "Mobile Phone",
+    status: "Hold",
+  },
+  {
+    key: "4",
+    sno: "4",
+    name: "Disabled User",
+    product: "earbuds",
+    status: "Hold",
+  },
+];
 const Dashboard = () => {
   const data = [
     {
@@ -113,6 +137,7 @@ const Dashboard = () => {
       },
     },
   };
+  const tableHeader = "Recent Orders";
   return (
     <>
       <div>
@@ -163,8 +188,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="mt-4">
-          <h3 className="mt-4">Recent Orders</h3>
-          <div>{/* <table columns={columns} dataSource={data1} /> */}</div>
+          <Listing header={tableHeader} columns={columns} data={data1} />
         </div>
       </div>
     </>
