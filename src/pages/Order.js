@@ -59,7 +59,6 @@ const Order = () => {
       status: "Hold",
     },
   ];
-  const tableHeader = "Orders";
   return (
     <>
       <div className="mb-4">

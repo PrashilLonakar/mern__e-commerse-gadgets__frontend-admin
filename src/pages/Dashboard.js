@@ -137,7 +137,6 @@ const Dashboard = () => {
       },
     },
   };
-  const tableHeader = "Recent Orders";
   return (
     <>
       <div>
@@ -188,7 +187,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="mt-4">
-          <Listing header={tableHeader} columns={columns} data={data1} />
+          <Listing header={"Recent Orders"} columns={columns} data={data1} />
         </div>
       </div>
     </>

@@ -59,7 +59,6 @@ const Customer = () => {
       status: "Hold",
     },
   ];
-  const tableHeader = "Customers";
   return (
     <>
       <div className="mb-4">
