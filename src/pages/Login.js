@@ -13,8 +13,18 @@ const Login = () => {
         <h3 className="text-center">Login</h3>
         <p className="text-center">Login to your account to continue</p>
         <form action="">
-          <CustomInput type="text" label="Email Address" id="email" />
-          <CustomInput type="password" label="password" id="pass" />
+          <CustomInput
+            name="email"
+            type="text"
+            label="Email Address"
+            id="email"
+          />
+          <CustomInput
+            name="password"
+            type="password"
+            label="password"
+            id="pass"
+          />
           <div className="text-end mb-3">
             <Link
               className="text-center text-decoration-none text-dark"

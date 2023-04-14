@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CustomInput from "../../components/common/CustomInput";
-import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { InboxOutlined } from "@ant-design/icons";
@@ -28,6 +27,10 @@ const props = {
 };
 
 const Add = () => {
+  const [quillValue, setQuillValue] = useState("");
+  const handleDesc = (e) => {
+    console.log(e);
+  };
   const selectData = [
     {
       name: "hii",
@@ -39,15 +42,62 @@ const Add = () => {
     },
   ];
 
-  const [value, setValue] = useState("");
-  const handleDesc = (e) => {
-    console.log(e);
-  };
   return (
     <div>
-      <h3 className="mb-4">Add Blog</h3>
+      <h3 className="mb-4">Add Product</h3>
       <div>
         <form action="">
+          <CustomInput
+            type="text"
+            label="Enter Product Title"
+            name="Product"
+            placeholder="Enter Product Title"
+            id="product"
+          />
+          <ReactQuill
+            theme="snow"
+            value={quillValue}
+            onChange={(evt) => handleDesc(evt)}
+          />
+          <CustomInput
+            type="text"
+            label="Enter Product Price"
+            name="productPrice"
+            placeholder="Enter Product Price"
+            id="productPrice"
+            i_class="my-3"
+          />
+          <CustomInput
+            type="select"
+            label="Brand"
+            id="brand-select"
+            name="brand"
+            data={selectData}
+            i_class="form-select py-3 my-3"
+          />
+          <CustomInput
+            type="select"
+            label="Category"
+            id="category-select"
+            name="category"
+            data={selectData}
+            i_class="form-select py-3 my-3"
+          />
+          <CustomInput
+            type="select"
+            label="Color"
+            id="color-select"
+            name="color"
+            data={selectData}
+            i_class="form-select py-3 my-3"
+          />
+          <CustomInput
+            type="text"
+            label="Enter Quantity"
+            name="quantity"
+            placeholder="Enter Quantity"
+            id="quantity"
+          />
           <div className="my-4">
             <Dragger {...props}>
               <p className="ant-upload-drag-icon">
@@ -62,32 +112,12 @@ const Add = () => {
               </p>
             </Dragger>
           </div>
-          <CustomInput
-            type="text"
-            label="Title"
-            name="title"
-            placeholder="Enter Blog Title"
-            id="title"
-          />
-          <CustomInput
-            type="select"
-            label="Blog Category"
-            id="blog-select"
-            name="blog-category"
-            data={selectData}
-            i_class="form-select py-3 mb-3"
-          />
-          <ReactQuill
-            theme="snow"
-            value={value}
-            onChange={(evt) => handleDesc(evt)}
-          />
           <div className="text-start mb-3">
             <button
               className="btn btn-success border-0 rounded-3 my-5"
               type="submit"
             >
-              Add Blog
+              Add Product
             </button>
           </div>
         </form>

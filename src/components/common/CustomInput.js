@@ -1,17 +1,19 @@
 import React from "react";
 
 const CustomInput = (props) => {
-  const { type, label, placeholder, i_id, i_class } = props;
+  const { name, type, label, placeholder, i_id, i_class } = props;
   return (
     <div>
       {props.type === "text" ||
       props.type === "number" ||
       props.type === "email" ||
-      props.type === "password" ? (
+      props.type === "password" ||
+      props.type === "color" ? (
         <div className="form-floating mb-3">
           <input
             type={type}
             className={`form-control ${i_class}`}
+            name={name}
             id={i_id}
             placeholder={placeholder}
           />
@@ -21,6 +23,7 @@ const CustomInput = (props) => {
         <div className="form-floating mb-3">
           <select
             id={i_id}
+            name={name}
             className={`form-control ${i_class}`}
             aria-label="Default select example"
           >
