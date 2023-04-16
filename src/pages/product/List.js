@@ -1,6 +1,7 @@
 import React from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../../components/common/Listing";
+import { MdEdit, MdOutlineDeleteForever } from "react-icons/md";
 
 interface DataType {
   key: React.Key;

@@ -5,7 +5,7 @@ const Listing = (props) => {
   return (
     <>
       <div>
-        <h3 className="mb-4">{props.header}</h3>
+        <h3 className="mb-4 title">{props.header}</h3>
         <div>
           <Table columns={props.columns} dataSource={props.data} />
         </div>
