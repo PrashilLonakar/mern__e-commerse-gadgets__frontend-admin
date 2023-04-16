@@ -59,7 +59,6 @@ const List = () => {
       status: "Hold",
     },
   ];
-  const tableHeader = "Brand";
   return (
     <>
       <div className="mb-4">

@@ -59,7 +59,6 @@ const Inquiries = () => {
       status: "Hold",
     },
   ];
-  const tableHeader = "Inquiries";
   return (
     <>
       <div className="mb-4">

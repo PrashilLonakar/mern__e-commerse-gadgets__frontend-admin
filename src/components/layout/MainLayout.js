@@ -16,6 +16,8 @@ import { FaBlogger, FaBlog } from "react-icons/fa";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { IoIosNotifications } from "react-icons/io";
 
+import { Link } from "react-router-dom";
+
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -223,14 +225,53 @@ const MainLayout = () => {
                 3
               </div>
             </div>
-            <div className="d-flex gap-3 align-items-center">
-              <div>
-                <HiUserCircle style={{ fontSize: "60px" }} />
+            <div
+              className="dropdown"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div className="d-flex gap-1 align-items-center">
+                <div>
+                  <HiUserCircle style={{ fontSize: "60px" }} />
+                </div>
+                <div>
+                  <h5 className="mb-0">Dummy</h5>
+                  <p className="mb-0">dummybummy@gmail.com</p>
+                </div>
               </div>
-              <div>
-                <h5 className="mb-0">Dummy</h5>
-                <p className="mb-0">dummybummy@gmail.com</p>
-              </div>
+            </div>
+            <div
+              className="dropdown-menu"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <li>
+                <Link
+                  className="dropdown-item py-1 mb-1"
+                  style={{ height: "auto", lineHeight: "20px" }}
+                  href="/#"
+                >
+                  View Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="dropdown-item py-1 mb-1"
+                  style={{ height: "auto", lineHeight: "20px" }}
+                  href="/#"
+                >
+                  Change Password
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="dropdown-item py-1 mb-1"
+                  style={{ height: "auto", lineHeight: "20px" }}
+                  href="/#"
+                >
+                  SignOut
+                </Link>
+              </li>
             </div>
           </div>
         </Header>
