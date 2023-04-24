@@ -18,13 +18,16 @@ const initialState = {
   message: "",
 };
 
-const login = createAsyncThunk("user/admin-login", async (user, thunkAPI) => {
-  try {
-    return await authService.login(user);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+export const login = createAsyncThunk(
+  "user/admin-login",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.login(user);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 export const authSlice = createSlice({
   name: "auth",

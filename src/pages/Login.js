@@ -3,8 +3,11 @@ import CustomInput from "../components/common/CustomInput";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   let schema = Yup.object({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
@@ -16,6 +19,7 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
+      dispatch(login(values));
       alert(JSON.stringify(values, null, 2));
     },
   });
@@ -38,11 +42,11 @@ const Login = () => {
             onCH={formik.handleChange("email")}
             o_class="mb-1"
           />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="text-danger error-validation-text">
-              {formik.errors.email}
-            </div>
-          ) : null}
+          <div className="error-validation-text">
+            {formik.touched.email && formik.errors.email ? (
+              <div>{formik.errors.email}</div>
+            ) : null}
+          </div>
           <CustomInput
             name="password"
             type="password"
