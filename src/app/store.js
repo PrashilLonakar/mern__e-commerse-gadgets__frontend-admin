@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createStore, applyMiddleware, compose } from "redux";
+import { applyMiddleware, compose } from "redux";
 
 import authReducer from "../features/auth/authSlice";
 import customerReducer from "../features/customers/customerSlice";

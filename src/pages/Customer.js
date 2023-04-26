@@ -20,7 +20,7 @@ const Customer = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "firstname",
     },
     {
       title: "Email",
@@ -69,11 +69,14 @@ const Customer = () => {
 
   const customerState = useSelector((state) => state.customer.customers);
   console.log("customer", customerState);
-  const data = customerState.getUsers.map((item, index) => ({
-    ...item,
-    sno: index + 1,
-  }));
-  console.log("data", data);
+  let data;
+  if (customerState.getUsers) {
+    data = customerState.getUsers.map((item, index) => ({
+      ...item,
+      sno: index + 1,
+    }));
+    console.log("data", data);
+  }
   return (
     <>
       <div className="mb-4">

@@ -26,6 +26,16 @@ const MainLayout = () => {
   } = theme.useToken();
   const navigate = useNavigate();
 
+  function onProfileMenuClick(nav) {
+    if (nav !== "/") {
+      console.log("navigate", nav);
+    } else {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      console.log("navigate", nav);
+    }
+  }
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -245,29 +255,29 @@ const MainLayout = () => {
               className="dropdown-menu"
               aria-labelledby="dropdownMenuButton1"
             >
-              <li>
+              <li onClick={() => onProfileMenuClick("profile")}>
                 <Link
                   className="dropdown-item py-1 mb-1"
                   style={{ height: "auto", lineHeight: "20px" }}
-                  href="/#"
+                  to="profile"
                 >
                   View Profile
                 </Link>
               </li>
-              <li>
+              <li onClick={() => onProfileMenuClick("change-password")}>
                 <Link
                   className="dropdown-item py-1 mb-1"
                   style={{ height: "auto", lineHeight: "20px" }}
-                  href="/#"
+                  to="change-password"
                 >
                   Change Password
                 </Link>
               </li>
-              <li>
+              <li onClick={() => onProfileMenuClick("/")}>
                 <Link
                   className="dropdown-item py-1 mb-1"
                   style={{ height: "auto", lineHeight: "20px" }}
-                  href="/#"
+                  to="/"
                 >
                   SignOut
                 </Link>
