@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../components/common/Listing";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../features/customers/customerSlice";
 
 interface DataType {
   key: React.Key;
@@ -18,18 +20,18 @@ const Customer = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "firstname",
     },
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Email",
+      dataIndex: "email",
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Mobile",
+      dataIndex: "mobile",
     },
   ];
-  const data: DataType[] = [
+  const data1: DataType[] = [
     {
       key: "1",
       sno: "1",
@@ -59,6 +61,22 @@ const Customer = () => {
       status: "Hold",
     },
   ];
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+
+  const customerState = useSelector((state) => state.customer.customers);
+  console.log("customer", customerState);
+  let data;
+  if (customerState.getUsers) {
+    data = customerState.getUsers.map((item, index) => ({
+      ...item,
+      sno: index + 1,
+    }));
+    console.log("data", data);
+  }
   return (
     <>
       <div className="mb-4">

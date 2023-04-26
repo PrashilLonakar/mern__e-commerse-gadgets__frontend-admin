@@ -64,3 +64,8 @@
 .dropdown-menu {
   width: 223px;
 }
+
+.error-validation-text {
+  color: var(--color-e52e2e);
+  font-size: 12px;
+}
