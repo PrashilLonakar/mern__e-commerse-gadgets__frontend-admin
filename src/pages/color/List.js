@@ -45,6 +45,7 @@ const List = () => {
     console.log("colorState", colorState);
     data = colorState.map((item, index) => ({
       ...item,
+      key: item._id,
       sno: index + 1,
       title: Capitalize(item.title),
       action: (

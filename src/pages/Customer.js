@@ -54,6 +54,7 @@ const Customer = () => {
       })
       .map((item, index) => ({
         ...item,
+        key: item._id,
         sno: index + 1,
         name: Capitalize(item.firstname) + " " + Capitalize(item.lastname),
       }));

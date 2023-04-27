@@ -69,10 +69,11 @@ const Order = () => {
   if (orderState.products) {
     data = orderState.products.map((item, index) => ({
       ...item,
+      key: item._id,
       sno: index + 1,
-      title: item.product.title,
-      brand: item.product.brand,
-      category: item.product.category,
+      title: Capitalize(item.product.title),
+      brand: Capitalize(item.product.brand),
+      category: Capitalize(item.product.category),
       updatedAt: convertDate(item.product.updatedAt),
     }));
     console.log("data product", data);

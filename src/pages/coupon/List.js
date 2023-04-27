@@ -51,6 +51,7 @@ const List = () => {
     console.log("couponState", couponState);
     data = couponState.map((item, index) => ({
       ...item,
+      key: item._id,
       sno: index + 1,
       name: Capitalize(item.name),
       action: (
