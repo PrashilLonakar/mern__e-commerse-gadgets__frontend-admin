@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../components/common/Listing";
+import { useDispatch, useSelector } from "react-redux";
+import { getInquirys } from "../features/inquiry/inquirySlice";
 
 interface DataType {
   key: React.Key;
@@ -19,46 +21,48 @@ const Inquiries = () => {
     {
       title: "Name",
       dataIndex: "name",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Email",
+      dataIndex: "email",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.email.length - b.email.length,
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Comment",
+      dataIndex: "comment",
     },
   ];
-  const data: DataType[] = [
-    {
-      key: "1",
-      sno: "1",
-      name: "John Brown",
-      product: "Mobile Phone",
-      status: "Pending",
-    },
-    {
-      key: "2",
-      sno: "2",
-      name: "Jim Green",
-      product: "Watch",
-      status: "Completed",
-    },
-    {
-      key: "3",
-      sno: "3",
-      name: "Joe Black",
-      product: "Mobile Phone",
-      status: "Hold",
-    },
-    {
-      key: "4",
-      sno: "4",
-      name: "Disabled User",
-      product: "earbuds",
-      status: "Hold",
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getInquirys());
+  }, []);
+
+  const inquiryState = useSelector((state) => {
+    console.log("state", state);
+    return state.inquiry.inquirys;
+  });
+  let data;
+  if (inquiryState) {
+    data = inquiryState
+      .filter((item) => {
+        return item.role !== "admin";
+      })
+      .map((item, index) => ({
+        ...item,
+        key: item._id,
+        sno: index + 1,
+        name: Capitalize(item.name),
+      }));
+    console.log("data inquiry", data);
+  }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <>
       <div className="mb-4">

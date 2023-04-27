@@ -11,6 +11,7 @@ import blogReducer from "../features/blog/blogSlice";
 import blogCategoryReducer from "../features/blog-category/blogCategorySlice";
 import couponReducer from "../features/coupon/couponSlice";
 import orderReducer from "../features/order/orderSlice";
+import inquiryReducer from "../features/inquiry/inquirySlice";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(reducer, /* preloadedState, */ composeEnhancers(applyMiddleware()))
@@ -28,6 +29,7 @@ export const store = configureStore(
       blogCategory: blogCategoryReducer,
       coupon: couponReducer,
       order: orderReducer,
+      inquiry: inquiryReducer,
     },
   },
   composeEnhancers(applyMiddleware())
