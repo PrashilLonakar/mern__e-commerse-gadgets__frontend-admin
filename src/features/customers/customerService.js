@@ -9,7 +9,7 @@ const getAllUsers = async () => {
       ),
     },
   });
-  return response.data;
+  return response.data?.getUsers;
 };
 
 const customerService = {
