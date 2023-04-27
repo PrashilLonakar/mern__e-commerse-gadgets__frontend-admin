@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../../components/common/Listing";
-
-interface DataType {
-  key: React.Key;
-  sno: string;
-  name: string;
-  product: string;
-  status: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../features/category/categorySlice";
+import { MdEdit, MdOutlineDeleteForever } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const List = () => {
   const columns: ColumnsType<DataType> = [
@@ -17,19 +13,24 @@ const List = () => {
       dataIndex: "sno",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Title",
+      dataIndex: "title",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.title - b.title,
     },
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Date",
+      dataIndex: "updatedAt",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Action",
+      dataIndex: "action",
     },
   ];
-  const data: DataType[] = [
+
+  const data1 = [
     {
       key: "1",
       sno: "1",
@@ -59,6 +60,48 @@ const List = () => {
       status: "Hold",
     },
   ];
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+
+  const categoryState = useSelector((state) => {
+    console.log("state", state);
+    return state.category.categories;
+  });
+  console.log("categoryState", categoryState);
+  let data;
+  if (categoryState) {
+    data = categoryState.map((item, index) => ({
+      ...item,
+      sno: index + 1,
+      title: Capitalize(item.title),
+      action: (
+        <>
+          <Link to="add" className="text-success btn-action">
+            <MdEdit />
+          </Link>
+          <Link className="text-danger btn-action">
+            <MdOutlineDeleteForever />
+          </Link>
+        </>
+      ),
+      updatedAt: convertDate(item.updatedAt),
+    }));
+  }
+
+  function convertDate(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <>
       <div className="mb-4">

@@ -20,63 +20,46 @@ const Customer = () => {
     },
     {
       title: "Name",
-      dataIndex: "firstname",
+      dataIndex: "name",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
       title: "Email",
       dataIndex: "email",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.email.length - b.email.length,
     },
     {
       title: "Mobile",
       dataIndex: "mobile",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.mobile - b.mobile,
     },
   ];
-  const data1: DataType[] = [
-    {
-      key: "1",
-      sno: "1",
-      name: "John Brown",
-      product: "Mobile Phone",
-      status: "Pending",
-    },
-    {
-      key: "2",
-      sno: "2",
-      name: "Jim Green",
-      product: "Watch",
-      status: "Completed",
-    },
-    {
-      key: "3",
-      sno: "3",
-      name: "Joe Black",
-      product: "Mobile Phone",
-      status: "Hold",
-    },
-    {
-      key: "4",
-      sno: "4",
-      name: "Disabled User",
-      product: "earbuds",
-      status: "Hold",
-    },
-  ];
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
   const customerState = useSelector((state) => state.customer.customers);
-  console.log("customer", customerState);
   let data;
   if (customerState.getUsers) {
-    data = customerState.getUsers.map((item, index) => ({
-      ...item,
-      sno: index + 1,
-    }));
-    console.log("data", data);
+    data = customerState.getUsers
+      .filter((item) => {
+        return item.role !== "admin";
+      })
+      .map((item, index) => ({
+        ...item,
+        sno: index + 1,
+        name: Capitalize(item.firstname) + " " + Capitalize(item.lastname),
+      }));
   }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <>
       <div className="mb-4">

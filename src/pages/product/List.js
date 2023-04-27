@@ -1,15 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../../components/common/Listing";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../features/product/productSlice";
 import { MdEdit, MdOutlineDeleteForever } from "react-icons/md";
-
-interface DataType {
-  key: React.Key;
-  sno: string;
-  name: string;
-  product: string;
-  status: string;
-}
+import { Link } from "react-router-dom";
 
 const List = () => {
   const columns: ColumnsType<DataType> = [
@@ -18,48 +13,74 @@ const List = () => {
       dataIndex: "sno",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Title",
+      dataIndex: "title",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.title.length - b.title.length,
     },
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Brand",
+      dataIndex: "brand",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.brand.length - b.brand.length,
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Category",
+      dataIndex: "category",
+    },
+    {
+      title: "rating",
+      dataIndex: "totalrating",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.totalrating - b.totalrating,
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.quantity - b.quantity,
+    },
+    {
+      title: "Per Price",
+      dataIndex: "price",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
     },
   ];
-  const data: DataType[] = [
-    {
-      key: "1",
-      sno: "1",
-      name: "John Brown",
-      product: "Mobile Phone",
-      status: "Pending",
-    },
-    {
-      key: "2",
-      sno: "2",
-      name: "Jim Green",
-      product: "Watch",
-      status: "Completed",
-    },
-    {
-      key: "3",
-      sno: "3",
-      name: "Joe Black",
-      product: "Mobile Phone",
-      status: "Hold",
-    },
-    {
-      key: "4",
-      sno: "4",
-      name: "Disabled User",
-      product: "earbuds",
-      status: "Hold",
-    },
-  ];
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
+  const productState = useSelector((state) => state.product.products);
+  console.log("productState", productState);
+  let data;
+  if (productState) {
+    data = productState.map((item, index) => ({
+      ...item,
+      sno: index + 1,
+      title: Capitalize(item.title),
+      action: (
+        <>
+          <Link to="add" className="text-success btn-action">
+            <MdEdit />
+          </Link>
+          <Link className="text-danger btn-action">
+            <MdOutlineDeleteForever />
+          </Link>
+        </>
+      ),
+    }));
+  }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
     <>
       <div className="mb-4">
