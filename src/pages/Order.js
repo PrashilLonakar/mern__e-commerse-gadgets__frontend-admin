@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../components/common/Listing";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../features/order/orderSlice";
+import { getOrders } from "../features/auth/authSlice";
 
 // interface DataType {
 //   key: React.Key;
@@ -63,7 +63,7 @@ const Order = () => {
 
   const orderState = useSelector((state) => {
     console.log("state", state);
-    return state.order.orders;
+    return state.auth.orders;
   });
   let data;
   if (orderState.products) {
