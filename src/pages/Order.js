@@ -50,9 +50,17 @@ const Order = () => {
     },
     {
       title: "Date",
-      dataIndex: "updatedAt",
+      dataIndex: "created",
       defaultSortOrder: "descend",
-      sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
+      sorter: (a, b) => new Date(a.created) - new Date(b.created),
+    },
+    {
+      title: "Order Status",
+      dataIndex: "orderStatus",
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
     },
   ];
 
@@ -63,18 +71,62 @@ const Order = () => {
 
   const orderState = useSelector((state) => {
     console.log("state", state);
-    return state.auth.orders;
+    return [state.auth.orders];
   });
   let data;
-  if (orderState.products) {
-    data = orderState.products.map((item, index) => ({
+  console.log("orderState", orderState);
+  if (orderState[0].products) {
+    data = orderState.map((item, index) => ({
       ...item,
       key: item._id,
+      // item.products.map((subItem, subIndex) => subItem._id),
       sno: index + 1,
-      title: Capitalize(item.product.title),
-      brand: Capitalize(item.product.brand),
-      category: Capitalize(item.product.category),
-      updatedAt: convertDate(item.product.updatedAt),
+      title: item.products.map((subItem, subIndex) => {
+        return (
+          <>
+            <ul className="list-style-none">
+              <li key={subItem._id}>{subItem.product.title}</li>
+            </ul>
+          </>
+        );
+      }),
+      brand: item.products.map((subItem, subIndex) => {
+        return (
+          <ul className="list-style-none">
+            <li key={subItem._id}>{subItem.product.brand}</li>
+          </ul>
+        );
+      }),
+      category: item.products.map((subItem, subIndex) => {
+        return (
+          <>
+            <ul className="list-style-none">
+              <li key={subItem._id}>{subItem.product.category}</li>
+            </ul>
+          </>
+        );
+      }),
+      color: item.products.map((subItem, subIndex) => {
+        return (
+          <>
+            <ul className="list-style-none">
+              <li key={subItem._id}>{subItem.color}</li>
+            </ul>
+          </>
+        );
+      }),
+      count: item.products.map((subItem, subIndex) => {
+        return (
+          <>
+            <ul className="list-style-none">
+              <li key={subItem._id}>{subItem.count}</li>
+            </ul>
+          </>
+        );
+      }),
+      created: convertDate(item.paymentIntent.created),
+      orderStatus: item.orderStatus,
+      amount: "$ " + item.paymentIntent.amount,
     }));
     console.log("data product", data);
   }
