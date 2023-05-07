@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ColumnsType } from "antd/es/table";
 import Listing from "../../components/common/Listing";
 
-interface DataType {
-  key: React.Key;
-  sno: string;
-  name: string;
-  product: string;
-  status: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { getCoupons } from "../../features/coupon/couponSlice";
+import { MdEdit, MdOutlineDeleteForever } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const List = () => {
   const columns: ColumnsType<DataType> = [
@@ -19,46 +16,71 @@ const List = () => {
     {
       title: "Name",
       dataIndex: "name",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Discounts",
+      dataIndex: "discount",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.discount - b.discount,
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Expiry-Date",
+      dataIndex: "expiry",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => new Date(a.expiry) - new Date(b.expiry),
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
     },
   ];
-  const data: DataType[] = [
-    {
-      key: "1",
-      sno: "1",
-      name: "John Brown",
-      product: "Mobile Phone",
-      status: "Pending",
-    },
-    {
-      key: "2",
-      sno: "2",
-      name: "Jim Green",
-      product: "Watch",
-      status: "Completed",
-    },
-    {
-      key: "3",
-      sno: "3",
-      name: "Joe Black",
-      product: "Mobile Phone",
-      status: "Hold",
-    },
-    {
-      key: "4",
-      sno: "4",
-      name: "Disabled User",
-      product: "earbuds",
-      status: "Hold",
-    },
-  ];
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCoupons());
+  }, []);
+
+  const couponState = useSelector((state) => {
+    console.log("state", state);
+    return state.coupon.coupons;
+  });
+  let data;
+  if (couponState) {
+    console.log("couponState", couponState);
+    data = couponState.map((item, index) => ({
+      ...item,
+      key: item._id,
+      sno: index + 1,
+      name: Capitalize(item.name),
+      action: (
+        <>
+          <Link to="add" className="text-success btn-action">
+            <MdEdit />
+          </Link>
+          <Link className="text-danger btn-action">
+            <MdOutlineDeleteForever />
+          </Link>
+        </>
+      ),
+      expiry: convertDate(item.expiry),
+    }));
+
+    console.log("data_1", data);
+  }
+
+  function convertDate(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <>
       <div className="mb-4">

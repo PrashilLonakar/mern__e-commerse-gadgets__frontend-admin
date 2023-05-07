@@ -75,6 +75,7 @@ const List = () => {
   if (categoryState) {
     data = categoryState.map((item, index) => ({
       ...item,
+      key: item._id,
       sno: index + 1,
       title: Capitalize(item.title),
       action: (

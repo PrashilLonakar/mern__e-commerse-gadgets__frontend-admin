@@ -63,6 +63,7 @@ const List = () => {
   if (productState) {
     data = productState.map((item, index) => ({
       ...item,
+      key: item._id,
       sno: index + 1,
       title: Capitalize(item.title),
       action: (

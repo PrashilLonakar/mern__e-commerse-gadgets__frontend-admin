@@ -30,7 +30,7 @@ const Login = () => {
   useEffect(() => {
     if (!user == null || isSuccess) {
       navigate("admin");
-    } else {
+    } else if (!isError && !isLoading) {
       alert("something went wrong.");
     }
   }, [user, isLoading, isError, isSuccess, message]);

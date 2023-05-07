@@ -42,18 +42,23 @@ const Customer = () => {
     dispatch(getUsers());
   }, []);
 
-  const customerState = useSelector((state) => state.customer.customers);
+  const customerState = useSelector((state) => {
+    console.log("state", state);
+    return state.customer.customers;
+  });
   let data;
-  if (customerState.getUsers) {
-    data = customerState.getUsers
+  if (customerState) {
+    data = customerState
       .filter((item) => {
         return item.role !== "admin";
       })
       .map((item, index) => ({
         ...item,
+        key: item._id,
         sno: index + 1,
         name: Capitalize(item.firstname) + " " + Capitalize(item.lastname),
       }));
+    console.log("data product", data);
   }
 
   function Capitalize(str) {
